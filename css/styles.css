@@ -445,7 +445,7 @@ body {
   padding-left: 5%;
   padding-right: 5%;
   padding-bottom: 90px;
-  background-image: url("/./img/Advocatus bgc.png");
+  background-image: url("../img/Advocatusbgc.png");
   color: #fff; }
   @media screen and (min-width: 370px) {
     .clients {
