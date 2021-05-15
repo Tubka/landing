@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Playfair+Display&display=swap" rel="stylesheet">
   <title>ADVOCATUS</title>
   <link rel="stylesheet" href="css/styles.css">
@@ -284,31 +286,22 @@
         <textarea name="message" id="textarea" class="form__input form__textarea" type="text" placeholder="Enter your message..."></textarea>
         <button type="button" class="form__button">Send Message</button>
       </form>
-      <div id="map"></div>
+      <div id='map'></div>
     </section>
   </section>
-  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
   <script>
-    map = new OpenLayers.Map("map");
-    map.addLayer(new OpenLayers.Layer.OSM());
-       
-    var pois = new OpenLayers.Layer.Text( "My Points",
-                    { location:"./textfile.txt",
-                      projection: map.displayProjection
-                    });
-    map.addLayer(pois);
- // create layer switcher widget in top right corner of map.
-    var layer_switcher= new OpenLayers.Control.LayerSwitcher({});
-    map.addControl(layer_switcher);
-    //Set start centrepoint and zoom    
-    var lonLat = new OpenLayers.LonLat( 9.5788, 48.9773 )
-          .transform(
-            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-            map.getProjectionObject() // to Spherical Mercator Projection
-          );
-    var zoom=11;
-    map.setCenter (lonLat, zoom);  
-    
+var map = L.map('map').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
   </script>
   <script src="script.js"></script>
 </body>
