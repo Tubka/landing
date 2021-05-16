@@ -35,7 +35,7 @@ body {
   @media screen and (min-width: 1850px) {
     .nav {
       flex-direction: row; } }
-  .nav .fa-eye {
+  .nav .fa-eye, .nav .icon {
     font-size: calc(var(--basicSize)*1.4);
     cursor: pointer; }
   .nav .nav__sizeFont {
@@ -866,6 +866,30 @@ body {
     @media screen and (min-width: 900px) {
       .contact .form__button {
         margin-bottom: 0; } }
+
+.footer {
+  font-size: var(--basicSize);
+  background-color: #111111;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 0; }
+  @media screen and (min-width: 600px) {
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 28px 20% 28px 23%; } }
+  .footer .footer__social {
+    margin-top: 14px; }
+    @media screen and (min-width: 600px) {
+      .footer .footer__social {
+        margin: 0; } }
+  .footer .fa-facebook-f,
+  .footer .fa-twitter,
+  .footer .fa-google-plus-g,
+  .footer .fa-instagram {
+    margin-left: 15px; }
 
 #map {
   box-shadow: -24px 22px #e7bf5d;

@@ -118,7 +118,7 @@ body {
     flex-direction: row;
   }
 
-  .fa-eye {
+  .fa-eye, .icon {
     font-size: calc(var(--basicSize)*1.4);
     cursor: pointer;
   }
@@ -924,6 +924,41 @@ body {
       margin-bottom: 0;
     }
   }
+}
+
+.footer {
+  font-size: var(--basicSize);
+  background-color: #111111;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 0;
+  // .foorer__social {
+    // }
+    
+    @media screen and (min-width: 600px) {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 28px 20% 28px 23%;
+      // padding-left: 20%;
+      // padding-right: 23%;
+  }
+
+  .footer__social {
+    margin-top: 14px;
+
+    @media screen and (min-width: 600px) {
+      margin: 0;
+    }
+  }
+
+  .fa-facebook-f, 
+  .fa-twitter,
+  .fa-google-plus-g, 
+  .fa-instagram {
+    margin-left: 15px;
+  } 
 }
 
 #map {
