@@ -19,19 +19,54 @@ body {
   padding: 0;
   box-sizing: inherit; }
 
+.nav__hamb {
+  background-color: transparent;
+  border: none;
+  z-index: 100;
+  position: absolute;
+  top: 9px;
+  right: 5%;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  @media screen and (min-width: 1600px) {
+    .nav__hamb {
+      display: none; } }
+  .nav__hamb .top {
+    background-color: var(--colorText);
+    border-radius: 2px;
+    width: 100%;
+    height: 20%; }
+  .nav__hamb .mid {
+    background-color: var(--colorText);
+    border-radius: 2px;
+    width: 100%;
+    height: 20%; }
+  .nav__hamb .bot {
+    background-color: var(--colorText);
+    border-radius: 2px;
+    width: 100%;
+    height: 20%; }
+
 .nav {
+  position: relative;
   z-index: 99;
   background-color: var(--bgcolor);
   color: var(--colorText);
   flex-direction: column;
   box-sizing: border-box;
-  min-height: 110px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between; }
   @media screen and (min-width: 1000px) {
     .nav {
       margin: 0 19%; } }
+  @media screen and (min-width: 1600px) {
+    .nav {
+      height: 110px; } }
   @media screen and (min-width: 1850px) {
     .nav {
       flex-direction: row; } }
@@ -47,18 +82,32 @@ body {
     font-size: calc(var(--basicSize) * 1.25); }
   .nav #biggestSize {
     font-size: calc(var(--basicSize) * 1.5); }
+  .nav .nav__header {
+    z-index: 3;
+    background-color: #fff; }
   .nav .nav__header--orange {
     color: #e8bf5d; }
   .nav .nav__list {
+    z-index: 2;
+    width: 100%;
+    background-color: var(--bgcolor);
+    transform: translateY(-100%);
+    transition: transform 0.6s;
     list-style-type: none;
     align-items: center;
     display: flex;
     flex-direction: column; }
+    .nav .nav__list.expand {
+      transform: translateY(-1%);
+      transition: transform 0.6s;
+      border-bottom: 2px solid #666; }
     @media screen and (min-width: 1600px) {
       .nav .nav__list {
-        flex-direction: row; } }
+        flex-direction: row;
+        transform: translateY(0); } }
   .nav .nav__link {
     color: var(--colorText);
+    background-color: var(--bgcolor);
     text-decoration: none; }
   .nav .nav__item {
     text-align: center;
@@ -76,21 +125,32 @@ body {
     bottom: 0; }
 
 .header {
-  height: 850px;
-  position: relative; }
+  height: 400px;
+  height: 70vw;
+  position: relative;
+  overflow: hidden; }
+  @media screen and (min-width: 1600px) {
+    .header {
+      height: 850px; } }
   .header #header1 {
+    transform: translateX(0);
+    position: absolute;
     height: 100%;
     background-image: linear-gradient(transparent, #2b2b2b), url("../img/Advocatus.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; }
   .header #header2 {
+    transform: translateX(100%);
+    position: absolute;
     height: 100%;
     background-image: linear-gradient(transparent, #2b2b2b), url("../img/Advocatus.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; }
   .header #header3 {
+    transform: translateX(200%);
+    position: absolute;
     height: 100%;
     background-image: linear-gradient(transparent, #2b2b2b), url("../img/Advocatus.png");
     background-repeat: no-repeat;
@@ -106,7 +166,7 @@ body {
     z-index: 11; }
     .header .header__switcher .header__switcher_circle {
       cursor: pointer;
-      margin: 0 5px;
+      margin: 0 10px;
       height: 15px;
       width: 15px;
       background-color: white;
@@ -121,17 +181,21 @@ body {
     bottom: 17%;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 80%;
     position: absolute;
     left: 50%;
     transform: translateX(-50%); }
+    @media screen and (min-width: 600px) {
+      .header .header__container {
+        width: 50%; } }
     @media screen and (min-width: 1600px) {
       .header .header__container {
         flex-direction: row; } }
   .header .header__name {
     font-family: 'Playfair Display', serif;
     letter-spacing: 4px;
-    line-height: 1; }
+    line-height: 1;
+    width: 100%; }
     @media screen and (min-width: 500px) {
       .header .header__name {
         font-size: calc(var(--basicSize) * 2); } }
@@ -146,6 +210,9 @@ body {
       .header .header__title {
         font-size: calc(var(--basicSize) * 2); } }
   .header .header__button {
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
     text-decoration: none;
     color: #000;
     background-color: #e8bf5d;
@@ -153,14 +220,36 @@ body {
     font-size: var(--basicSize);
     border: none;
     border-radius: 50px;
-    margin-top: 30px; }
+    margin-top: 30px;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+    padding: 6px 20px;
+    margin-bottom: 30px; }
+    .header .header__button:hover {
+      background-color: #e2c98f;
+      box-shadow: 3px 5px 5px #000; }
+    .header .header__button:active {
+      transform: translateY(5px);
+      box-shadow: none; }
+    .header .header__button:focus {
+      background-color: #e7ad25;
+      box-shadow: 0px 0px 5px #000;
+      transition: box-shadow 0.1s; }
+    @media screen and (min-width: 600px) {
+      .header .header__button {
+        padding: 12px 37px; } }
+    @media screen and (min-width: 1200px) {
+      .header .header__button {
+        padding: 17px 47px; } }
   .header .header__banner {
+    overflow: hidden;
+    transition: all 0.5s;
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
-    left: 0;
-    z-index: 1; }
+    left: 0; }
+  .header .header__transition {
+    transition: all 0.3s; }
   .header .slider--display {
     z-index: 10; }
 
@@ -446,6 +535,8 @@ body {
   padding-right: 5%;
   padding-bottom: 90px;
   background-image: url("../img/Advocatusbgc.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #fff; }
   @media screen and (min-width: 370px) {
     .clients {
@@ -504,8 +595,10 @@ body {
     display: flex;
     justify-content: space-between; }
   .clients .clients__comments_img {
-    width: 100px;
-    height: 82px;
+    transition: all 1s;
+    visibility: visible;
+    width: 260px;
+    height: 234px;
     box-shadow: 20px 22px #e7bf5d; }
     @media screen and (min-width: 400px) {
       .clients .clients__comments_img {
@@ -516,7 +609,7 @@ body {
         width: 300px;
         height: 270px; } }
   .clients .clients__comments_description {
-    max-height: 150px;
+    max-height: 100px;
     overflow-y: hidden; }
   .clients .clients__comments_text {
     position: relative;
@@ -547,7 +640,7 @@ body {
   .clients .clients__comments_title {
     font-size: calc(var(--basicSize)*0.875); }
   .clients .comments__dots {
-    width: 47px;
+    width: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center; }
@@ -563,7 +656,8 @@ body {
     height: 10px;
     border-radius: 50%;
     background-color: transparent;
-    border: 1px solid white; }
+    border: 1px solid white;
+    transition: background-color 1s; }
   .clients .comments__dots_dot--active {
     width: 15px;
     height: 15px;
@@ -769,7 +863,10 @@ body {
   .faq .faq__question--active {
     color: #e8bf5d; }
   .faq .faq__question_content {
+    transition: color 0.3s;
     line-height: var(--lineHeight); }
+  .faq .faq__question_content--displayNone {
+    color: #e8bf5d; }
 
 .contact {
   padding-top: 30px;
@@ -855,6 +952,9 @@ body {
   .contact .form__button {
     align-self: center;
     margin-bottom: 20px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
     text-decoration: none;
     color: #000;
     background-color: #e8bf5d;
@@ -862,7 +962,18 @@ body {
     font-size: var(--basicSize);
     border: none;
     border-radius: 50px;
-    margin-top: 30px; }
+    margin-top: 30px;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s; }
+    .contact .form__button:hover {
+      background-color: #e2c98f;
+      box-shadow: 3px 5px 5px #000; }
+    .contact .form__button:active {
+      transform: translateY(5px);
+      box-shadow: none; }
+    .contact .form__button:focus {
+      background-color: #e7ad25;
+      box-shadow: 0px 0px 5px #000;
+      transition: box-shadow 0.1s; }
     @media screen and (min-width: 900px) {
       .contact .form__button {
         margin-bottom: 0; } }

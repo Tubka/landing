@@ -14,13 +14,18 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <button class="nav__hamb" id="hamb">
+    <div class="top"></div>
+    <div class="mid"></div>
+    <div class="bot"></div>
+  </button>
   <nav class="nav">
     <header class="nav__header">
       <h1><a href="" class="nav__link">ADVOCATUS<span class="nav__header--orange">.</span></a></h1>
     </header>
     <ul class="nav__list">
       <li class="nav__item"><i class="icon fas fa-eye"></i></li>
-      <li class="nav_item"><span class="nav__sizeFont" id="normalSize">A</span><span class="nav__sizeFont" id="biggerSize">A+</span><span class="nav__sizeFont" id="biggestSize">A++</span></li>
+      <li class="nav__item"><span class="nav__sizeFont" id="normalSize">A</span><span class="nav__sizeFont" id="biggerSize">A+</span><span class="nav__sizeFont" id="biggestSize">A++</span></li>
       <li class="nav__item"><a class="nav__link" href="#about">ABOUT US</a></li>
       <li class="nav__item"><a class="nav__link nav__link--active" href="#practis">PRACTICE AREA</a></li>
       <li class="nav__item"><a class="nav__link" href="#lawyers">LAWYERS</a></li>
@@ -164,7 +169,7 @@
     <div class="clients__comments">
       <div class="clientS__wrapperComments">
         <div class="clients__comments_container ">
-          <div class="clients__comment clients__slider--display">
+          <div class="clients__comment clients__comments_one clients__slider--display opacity">
             <img class="clients__comments_img" src="./img/client.png" alt="">
             <div class="clients__comments_text">
               <p class="clients__comments_description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore dolor fuga consequuntur natus accusamus mollitia cupiditate unde est. Fugiat praesentium amet in mollitia sunt dolore atque soluta. Quae, tempora quasi?</p>
@@ -172,7 +177,7 @@
               <p class="clients__comments_title">CEO</p>
             </div>
           </div>
-          <div class="clients__comment" >
+          <div class="clients__comment clients__comments_one" >
             <img class="clients__comments_img" src="./img/client.png" alt="">
             <div class="clients__comments_text">
               <p class="clients__comments_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore non facilis amet, ipsum esse voluptates laudantium sunt, vitae nihil soluta recusandae temporibus quod provident excepturi, exercitationem possimus officia quas fuga reprehenderit. Veniam vero similique ad cupiditate, sequi alias sapiente hic.<p>
@@ -180,7 +185,7 @@
               <p class="clients__comments_title">CEO</p>
             </div>
           </div>
-          <div class="clients__comment">
+          <div class="clients__comment clients__comments_one">
             <img class="clients__comments_img" src="./img/client.png" alt="">
             <div class="clients__comments_text">
               <p class="clients__comments_description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam aliquam dolores error, iste hic obcaecati quos, odio quaerat ipsum ea, molestiae alias praesentium adipisci suscipit asperiores velit. Animi, numquam qui!</p>
@@ -233,7 +238,7 @@
           <p>Share</p>
         </footer>
       </article>
-      <article class="publications__article">
+      <article class="publications__article ">
         <img class="publications__article_img" src="./img/pub3.png" alt="">
         <header class="publications__article_header">
           <div class="publications__article_container">
@@ -278,10 +283,10 @@
       <form 
         id="form"
         class="contact__form" 
-        action="https://formspree.io/f/"
+        action="mailer.php"
         method="POST">
         <input name="name" id="name" class="form__input" type="text" placeholder="Enter your name...">
-        <input name="_replyto" id="email" class="form__input" type="text" placeholder="Enter your email...">
+        <input name="email" id="email" class="form__input" type="text" placeholder="Enter your email...">
         <input name="phone" id="phone" class="form__input" type="text" placeholder="Enter your phone...">
         <textarea name="message" id="textarea" class="form__input form__textarea" type="text" placeholder="Enter your message..."></textarea>
         <button type="button" class="form__button">Send Message</button>

@@ -69,8 +69,10 @@
     max-width: 90%;
   }
 }
-
 @mixin button {
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
   text-decoration: none;
   color: #000;
   background-color: #e8bf5d;
@@ -79,6 +81,21 @@
   border: none;
   border-radius: 50px;
   margin-top: 30px;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+  &:hover {
+    background-color: #e2c98f;
+    box-shadow: 3px 5px 5px #000;
+  }
+  &:active {
+    transform: translateY(5px);
+    box-shadow: none;
+  }
+  &:focus {
+    background-color: #e7ad25;
+    box-shadow: 0px 0px 5px #000;
+    transition: box-shadow 0.1s;
+  }
+
 }
 
 
@@ -100,23 +117,69 @@ body {
   box-sizing: inherit;
 }
 
+.nav__hamb {
+  background-color: transparent;
+  border: none;
+  z-index: 100;
+  position: absolute;
+  top: 9px;
+  right: 5%;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media screen and (min-width: 1600px) {
+    display: none;
+  }
+  
+  .top {
+    background-color: var(--colorText);
+    border-radius: 2px;
+    width: 100%;
+    height: 20%;
+  }
+  .mid {
+    background-color: var(--colorText);
+    border-radius: 2px;
+    width: 100%;
+    height: 20%;
+  }
+  .bot {
+    background-color: var(--colorText);
+    border-radius: 2px;
+    width: 100%;
+    height: 20%;
+  }
+}
+
 
 .nav {
   @include margin;
+  position: relative;
+  // position: fixed;
+  // width: 100%;
 
   z-index: 99;
   background-color: var(--bgcolor);
   color: var(--colorText);
   flex-direction: column;
   box-sizing: border-box;
-  min-height: 110px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  @media screen and (min-width: 1600px) {
+    height: 110px;
+  }
+
   @media screen and (min-width: 1850px) {
     flex-direction: row;
   }
+
+
 
   .fa-eye, .icon {
     font-size: calc(var(--basicSize)*1.4);
@@ -138,23 +201,48 @@ body {
     font-size: calc(var(--basicSize) * 1.5);
   }
 
+  .nav__header {
+    z-index: 3;
+    background-color: #fff;
+  }
   .nav__header--orange {
     color: #e8bf5d;
   }
   
   .nav__list {
+    // position: absolute;
+    // right: 0;
+
+    z-index: 2;
+    width: 100%;
+    background-color: var(--bgcolor);
+    transform: translateY(-100%);
+    transition: transform 0.6s;
     list-style-type: none;
     align-items: center;
     display: flex;
     flex-direction: column;
+    
+    &.expand {
+      transform: translateY(-1%);
+      transition: transform 0.6s;
+      border-bottom: 2px solid #666;
+    }  
 
     @media screen and (min-width: 1600px) {
       flex-direction: row;
+      transform: translateY(0); 
     }
+
+    // @media screen and(min-width) {
+      
+    // }
   }
+
   
   .nav__link {
     color: var(--colorText);
+    background-color: var(--bgcolor);
     text-decoration: none;
   }
   
@@ -179,9 +267,17 @@ body {
 }
 
 .header {
-  height: 850px;
+  height: 400px;
+  height: 70vw;
   position: relative;
+  overflow: hidden;
+  
+  @media screen and (min-width: 1600px) {
+    height: 850px;
+  }
   #header1 {
+    transform: translateX(0);
+    position: absolute;
     height: 100%;
     background-image: linear-gradient(transparent, #2b2b2b), url("../img/Advocatus.png") ;
     background-repeat: no-repeat;
@@ -189,6 +285,8 @@ body {
     background-size: cover;
   }
   #header2 {
+    transform: translateX(100%);
+    position: absolute;
     height: 100%;
     background-image: linear-gradient(transparent, #2b2b2b), url("../img/Advocatus.png") ;
     background-repeat: no-repeat;
@@ -196,6 +294,8 @@ body {
     background-size: cover;
   }
   #header3 {
+    transform: translateX(200%);
+    position: absolute;
     height: 100%;
     background-image: linear-gradient(transparent, #2b2b2b), url("../img/Advocatus.png") ;
     background-repeat: no-repeat;
@@ -214,7 +314,7 @@ body {
     
     .header__switcher_circle {
       cursor: pointer;
-      margin: 0 5px;
+      margin: 0 10px;
       height: 15px;
       width: 15px;
       background-color: white;
@@ -234,10 +334,14 @@ body {
     bottom: 17%; 
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 80%;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+
+    @media screen and (min-width: 600px) {
+      width: 50%;
+    }
 
     @media screen and (min-width: 1600px) {
       flex-direction: row;
@@ -248,6 +352,7 @@ body {
     font-family: 'Playfair Display', serif;
     letter-spacing: 4px;
     line-height: 1;
+    width: 100%;
     
     @media screen and (min-width: 500px) {
       font-size: calc(var(--basicSize) * 2);
@@ -270,15 +375,32 @@ body {
   }
   .header__button {
     @include button;
+    
+    padding: 6px 20px;
+    margin-bottom: 30px;
+
+    @media screen and (min-width: 600px) {
+      padding: 12px 37px;
+    }
+    @media screen and (min-width: 1200px) {
+      padding: 17px 47px;
+    }
+
+    
   }
 
   .header__banner {
+    overflow: hidden;
+    transition: all 0.5s;
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+  }
+
+  .header__transition {
+    transition: all 0.3s
   }
 
   .slider--display {
@@ -547,6 +669,8 @@ body {
 .clients {
   @include paddingSection;
   background-image: url('../img/Advocatusbgc.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #fff;
 
 
@@ -579,12 +703,15 @@ body {
 
 .clients__slider--display {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
+
 }
 
 .clients__comments_img {
-  width: 100px;
-  height: 82px;
+  transition: all 1s;
+  visibility: visible;
+  width: 260px;
+  height: 234px;
   box-shadow: 20px 22px #e7bf5d;
   
 
@@ -600,14 +727,16 @@ body {
 }
 
 .clients__comments_description {
-  max-height: 150px;
+  max-height: 100px;
   overflow-y: hidden;
-  
   @media screen and (min-width: 1600px) {
   }
 }
 
 .clients__comments_text {
+  // opacity: 1;
+  // visibility: visible;
+  // transition: all 1s;
   position: relative;
   margin-top: 10%;
   font-size: calc(var(--basicSize) * 0.825);
@@ -648,7 +777,7 @@ body {
 }
 
 .comments__dots {
-  width: 47px;
+  width: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -662,12 +791,14 @@ body {
 }
 
 .comments__dots_dot {
+
   cursor: pointer;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background-color: transparent;
   border: 1px solid white;
+  transition: background-color 1s
 }
 
 .comments__dots_dot--active {
@@ -702,7 +833,6 @@ body {
     
     @media screen and (min-width: 900px) {
       flex-direction: row;
-    
     }
   }
 
@@ -852,7 +982,13 @@ body {
   }
 
   .faq__question_content {
+    transition: color 0.3s;
     line-height: var(--lineHeight);
+  }
+
+  .faq__question_content--displayNone {
+    // display: none;
+    color: #e8bf5d;
   }
 }
 

@@ -5,7 +5,7 @@ class Slider {
     this.time = time
     this.wrapper = wrapper
     this.dots = dots
-    this.element = 0
+    this.element = 1
     this.loop = null
     this.children = null
   };
@@ -46,14 +46,68 @@ class Slider {
   this.children = [...this.wrapper.children];
   startLoop();
   }
+
+
+
+  slider = () => {
+    const changeElement = () => {
+      console.log('asdasd')
+      Object.values(this.dots.children).forEach(el => {
+        el.classList.remove(this.classDot)
+      })
+      if(this.element ===0) {
+        this.children[0].style.transform = `translate(${0}%, 0)`
+        this.children[1].style.transform = `translate(${100}%, 0)`
+        this.children[2].style.transform = `translate(${200}%, 0)`
+      } 
+      if(this.element ===1) {
+        this.children[0].style.transform = `translate(${-100}%, 0)`
+        this.children[1].style.transform = `translate(${0}%, 0)`
+        this.children[2].style.transform = `translate(${100}%, 0)`
+      } 
+      if(this.element ===2) {
+        this.children[0].style.transform = `translate(${-200}%, 0)`
+        this.children[1].style.transform = `translate(${-100}%, 0)`
+        this.children[2].style.transform = `translate(${0}%, 0)`
+      }
+      
+      
+      this.children[this.element%this.children.length].classList.add(this.classDisplay);
+      this.dots.children[this.element%this.children.length].classList.add(this.classDot);
+      if(this.element===2) {
+        this.element = 0;
+        return
+      }
+      this.element++;
+    }
+  Object.values(this.dots.children).forEach((el, index) => {
+    el.addEventListener('click', () => {
+      this.element = index;
+      changeElement();
+      clearLoop();
+      startLoop();
+    })
+  })
+
+  const startLoop = () => {
+    this.loop = setInterval(changeElement, this.time);
+  }
+
+  const clearLoop = () => {
+    clearInterval(this.loop);
+  }
+
+  this.children = [...this.wrapper.children];
+  startLoop();
+  }
 }
 
 
 const headerContainer = document.querySelector('.wrapperBanner');
 const headerSwitcher = document.querySelector('.header__switcher');
 
-const headerSlider = new Slider(headerContainer,headerSwitcher, 1000, 'slider--display', 'header__switcher_circle--active');
-headerSlider.start();
+const headerSlider = new Slider(headerContainer,headerSwitcher, 2000, 'slider--display', 'header__switcher_circle--active');
+headerSlider.slider();
 
 const commentsContainer = document.querySelector('.clients__comments_container');
 const commentsSwitcher = document.querySelector('.comments__dots');
@@ -91,17 +145,24 @@ if(listQuestion.length) {
       const spanToAddSign = el.querySelector('span');
       const questionContent = document.querySelector('.faq__question_content');
 
-      if(!active) return;
-      if(!activeSpan) return;
-      if(!spanToAddSign) return;
-      if(!questionContent) return;
-
       activeSpan.textContent = '+';
       active.classList.remove('faq__question--active');
 
       el.classList.add('faq__question--active');
       spanToAddSign.textContent = '-'
-      questionContent.textContent = texts[index];
+      console.log(document.querySelector('.faq__question_content'))
+      document.querySelector('.faq__question_content').classList.add('faq__question_content--displayNone');
+      setTimeout(() => {
+  
+        if(!active) return;
+        if(!activeSpan) return;
+        if(!spanToAddSign) return;
+        if(!questionContent) return;
+  
+        questionContent.textContent = texts[index];
+  
+        document.querySelector('.faq__question_content').classList.remove('faq__question_content--displayNone');
+      },600)
     });
   });
 }
@@ -175,9 +236,10 @@ document.querySelector('.form__button').addEventListener('click', el => {
   
   if(alerts.length) {
     const form = document.querySelector('.contact__form');
-    document.querySelectorAll('p').forEach(el => el.remove())
+    document.querySelectorAll('.error').forEach(el => el.remove())
     alerts.forEach(el => {
       const element = document.createElement('p');
+      element.classList.add('error');
       element.style.color = 'red';
       element.style.margin = '4px 0'
       element.textContent = el;
@@ -190,5 +252,15 @@ document.querySelector('.form__button').addEventListener('click', el => {
   document.querySelector('#form').submit();
 })
 
+document.querySelectorAll('.nav__item').forEach((el, index) => {
+  el.addEventListener('click', () => {
+    if(index<2) return;
+    document.querySelector('.nav__list').classList.remove('expand');
+  })  
+})
 
 
+document.querySelector('#hamb').addEventListener('click', function() {
+  console.log(document.querySelector('.nav__list'));
+  document.querySelector('.nav__list').classList.toggle('expand');
+})
