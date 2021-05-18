@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +12,10 @@
    $header = "From: Testowe@@";
    $headers .= "Content-Type: text/html; charset=utf-8\r\n";
    $name = $_POST['name'];
-   $to = $_POST['email'];
+   $to = 'email@example.ccom'
+   $from = $_POST['email']
    $subject = $_POST['message'] . $_POST['phone'];
-   $message = "Witaj to wiadomość testowa \n Odpowiedz na email:" . $_POST['email'];
+   $message = "Witaj to wiadomość testowa \n Odpowiedz na email:" . $from;
    mail($to, $subject, $message, $header);
 
    echo <p> Wiadomość wysłano, niedługo się z Tobą skontaktujemy ;) </p>
